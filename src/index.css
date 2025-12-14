@@ -16,6 +16,12 @@
 	font-weight: 800;
 	font-style: normal;
 }
+@font-face {
+	font-family: 'Ruda';
+	src: url('../src/assets/fonts/Ruda-Medium.woff2');
+	font-weight: 800;
+	font-style: normal;
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -154,4 +160,13 @@ canvas {
 	width: 100% !important;
 	height: 100% !important;
 	touch-action: none;
+}
+
+.custom-dot {
+  @apply px-3 py-1 rounded-lg font-semibold text-white
+         bg-[#B3C0D2] transition-all;
+}
+
+.swiper-pagination-bullet-active.custom-dot {
+  @apply bg-[#FF1818] scale-110;
 }

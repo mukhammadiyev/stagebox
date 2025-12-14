@@ -128,6 +128,7 @@ export default function MenuLinks({ device = 'desktop' }) {
 												{column.items.map((item, idx) => (
 													<Link
 														to={link.to}
+														key={idx}
 														className='text-[15px] text-gray-700 hover:text-red-500 cursor-pointer transition-colors'
 														onClick={() => setLinkOpen(false)}
 													>

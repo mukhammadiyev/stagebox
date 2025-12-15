@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom'
 import CompanyAdvantages from '../components/CompanyAdvantages'
 import ShoeSlider3D from '../components/ShoeSlider3D'
 import ViewProductsSlider from '../components/ViewProductsSlider'
+import MiniBlog from '../components/MiniBlog'
 
 function home() {
 	const { category } = useParams()
@@ -11,6 +12,7 @@ function home() {
 			<ShoeSlider3D />
 			<ViewProductsSlider for={'shoes'} theme={'Лучшие из лучших'} />
 			<CompanyAdvantages />
+			<MiniBlog/>
 		</div>
 	)
 }

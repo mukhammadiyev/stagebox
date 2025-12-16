@@ -1,8 +1,9 @@
 import { useParams } from 'react-router-dom'
+import BrandSlider from '../components/BrandSlider'
 import CompanyAdvantages from '../components/CompanyAdvantages'
+import MiniBlog from '../components/MiniBlog'
 import ShoeSlider3D from '../components/ShoeSlider3D'
 import ViewProductsSlider from '../components/ViewProductsSlider'
-import MiniBlog from '../components/MiniBlog'
 
 function home() {
 	const { category } = useParams()
@@ -10,9 +11,10 @@ function home() {
 	return (
 		<div className='w-full mx-auto'>
 			<ShoeSlider3D />
-			<ViewProductsSlider for={'shoes'} theme={'Лучшие из лучших'} />
+			<ViewProductsSlider forPr={'mens-shoes'} theme={'Лучшие из лучших'} />
 			<CompanyAdvantages />
-			<MiniBlog/>
+			<MiniBlog />
+			<BrandSlider />
 		</div>
 	)
 }

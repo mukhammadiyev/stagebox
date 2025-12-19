@@ -1,10 +1,31 @@
 import { Card, CardContent } from '@/components/ui/card'
+import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
 import { IoMdHeart } from 'react-icons/io'
-export default function ProductCard({ product }) {
+export default function ProductCard({ product , loading }) {
 	const sizes = [36, 37, 38, 39, 40, 41, 42, 43,]
 	const [liked, setLiked] = useState(false)
+	if (loading) {
+    return (
+      <div className='group relative h-[350px] w-full flex justify-center'>
+        <Card className='relative rounded-[20px] w-full max-w-[280px] h-[350px] overflow-hidden p-0!'>
+          <CardContent className='flex flex-col justify-between p-0!'>
+            {/* Image Skeleton */}
+            <Skeleton className='w-full h-[180px] rounded-t-[20px] bg-gray-300 animate-pulse' />
+            <div className='w-full p-6 flex flex-col gap-2'>
+              {/* Title Skeleton */}
+              <Skeleton className='h-6 w-full rounded-md bg-gray-300 animate-pulse' />
+              {/* Price Skeleton */}
+              <Skeleton className='h-6 w-1/2 rounded-md bg-gray-300 animate-pulse' />
+							<Skeleton className=' mt-2 h-8 w-full rounded-md bg-gray-300 animate-pulse' />
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
 	return (
 		<div className='group relative h-[350px] w-full flex justify-center'>
 			{/* BASE CARD */}
@@ -59,7 +80,7 @@ export default function ProductCard({ product }) {
 			>
 				<CardContent className='flex flex-col justify-between p-0!'>
 					<img
-						src={product.images[1]}
+						src={product.images[1] ?? product.images[0]}
 						alt=''
 						className='w-full h-[220px] rounded-t-[20px] object-contain object-center '
 					/>

@@ -13,13 +13,13 @@ export default function ViewProductsSlider({ forPr, theme }) {
 	const prevRef = useRef(null)
 	const nextRef = useRef(null)
 
-	if (loading) {
-		return <div className='text-center py-20'>Loading products...</div>
-	}
-
 	if (error) {
 		return <div className='text-center py-20 text-red-500'>{error}</div>
 	}
+
+	const slides = loading
+		? [...Array(4)].map((_, i) => ({ id: i, loading: true })) // 4 skeletons
+		: products.products
 
 	return (
 		<div className='w-full container mx-auto'>
@@ -63,12 +63,12 @@ export default function ViewProductsSlider({ forPr, theme }) {
 							swiper.params.navigation.nextEl = nextRef.current
 						}}
 					>
-						{products.products.map(p => (
+						{slides.map(p => (
 							<SwiperSlide
 								key={p.id}
 								className='flex justify-center items-start'
 							>
-								<ProductCard product={p} />
+								<ProductCard product={p} loading={p.loading} />
 							</SwiperSlide>
 						))}
 					</Swiper>

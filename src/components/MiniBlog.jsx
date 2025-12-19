@@ -64,10 +64,10 @@ function MiniBlog() {
 						<h1 className='w-full py-8 px-16 text-white text-2xl font-semibold uppercase font-montserrat'>
 							Подпишись на рассылку и получи скидку до 10 %{' '}
 						</h1>
-						<div className='w-full bg-white rounded-[20px] py-8 px-16 flex flex-col gap-9' >
-							<input type="text" className='w-full border-b-2 border-[#002C6A] text-2xl font-ruda p-0 pb-2 outline-none placeholder:text-[#B3C0D2]' placeholder='Введите Ваш email' />
+						<form className='w-full bg-white rounded-[20px] py-8 px-16 flex flex-col gap-9' >
+							<input type="email" className='w-full border-b-2 border-[#002C6A] text-2xl font-ruda p-0 pb-2 outline-none placeholder:text-[#B3C0D2]' placeholder='Введите Ваш email' />
 							<button className='py-4 px-13 rounded-full bg-[#FF1818] text-white w-max text-xl font-montserrat font-semibold'>Подписаться</button>
-						</div>
+						</form>
 					</div>
 				</div>
 			</div>

@@ -113,7 +113,8 @@ function Basket() {
 										<div className='text-lg flex items-center gap-5 mb-4'>
 											Размер:
 											<p className='text-[#002C6A] font-semibold'>
-												{p.size} EUR <span className='font-normal'>({p.size - 15} см)</span>
+												{p.size} EUR{' '}
+												<span className='font-normal'>({p.size - 15} см)</span>
 											</p>
 										</div>
 										<p className='text-[#FF1818] text-4xl font-semibold'>
@@ -127,7 +128,10 @@ function Basket() {
 												setCart(
 													cart.map((item, i) =>
 														i === idx
-															? { ...item, quantity: Math.max(1, item.quantity - 1) }
+															? {
+																	...item,
+																	quantity: Math.max(1, item.quantity - 1),
+															  }
 															: item
 													)
 												)
@@ -141,7 +145,9 @@ function Basket() {
 											onClick={() =>
 												setCart(
 													cart.map((item, i) =>
-														i === idx ? { ...item, quantity: item.quantity + 1 } : item
+														i === idx
+															? { ...item, quantity: item.quantity + 1 }
+															: item
 													)
 												)
 											}
@@ -170,20 +176,89 @@ function Basket() {
 						<div className='text-5xl font-semibold my-8'>
 							Сумма к оплате:
 							<span className='text-blue-900 ml-10'>
-								{Math.round(cart.reduce((sum, item) => sum + item.price * item.quantity, 0))} ₽
+								{Math.round(
+									cart.reduce(
+										(sum, item) => sum + item.price * item.quantity,
+										0
+									)
+								)}{' '}
+								₽
 							</span>
 						</div>
 
 						<div className='w-full grid grid-cols-2 gap-x-14 gap-y-8'>
-							<input type='text' name='lastName' placeholder='Фамилия' value={userData.lastName} onChange={handleInputChange} className='border-b-2 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0' />
-							<input type='text' name='region' placeholder='область/регион' value={userData.region} onChange={handleInputChange} className='border-b-2 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0' />
-							<input type='text' name='firstName' placeholder='Имя' value={userData.firstName} onChange={handleInputChange} className='border-b-2 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0' />
-							<input type='text' name='city' placeholder='Город' value={userData.city} onChange={handleInputChange} className='border-b-2 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0' />
-							<input type='text' name='middleName' placeholder='Отчество' value={userData.middleName} onChange={handleInputChange} className='border-b-2 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0' />
-							<input type='text' name='street' placeholder='Улица' value={userData.street} onChange={handleInputChange} className='border-b-2 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0' />
-							<input type='email' name='email' placeholder='Email' value={userData.email} onChange={handleInputChange} className='border-b-2 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0' />
-							<input type='text' name='house' placeholder='дом' value={userData.house} onChange={handleInputChange} className='border-b-2 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0' />
-							<input type='tel' name='phone' placeholder='Телефон' value={userData.phone} onChange={handleInputChange} className='border-b-2 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0' />
+							<input
+								type='text'
+								name='lastName'
+								placeholder='Фамилия'
+								value={userData.lastName}
+								onChange={handleInputChange}
+								className='border-b-2 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0'
+							/>
+							<input
+								type='text'
+								name='region'
+								placeholder='область/регион'
+								value={userData.region}
+								onChange={handleInputChange}
+								className='border-b-2 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0'
+							/>
+							<input
+								type='text'
+								name='firstName'
+								placeholder='Имя'
+								value={userData.firstName}
+								onChange={handleInputChange}
+								className='border-b-2 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0'
+							/>
+							<input
+								type='text'
+								name='city'
+								placeholder='Город'
+								value={userData.city}
+								onChange={handleInputChange}
+								className='border-b-2 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0'
+							/>
+							<input
+								type='text'
+								name='middleName'
+								placeholder='Отчество'
+								value={userData.middleName}
+								onChange={handleInputChange}
+								className='border-b-2 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0'
+							/>
+							<input
+								type='text'
+								name='street'
+								placeholder='Улица'
+								value={userData.street}
+								onChange={handleInputChange}
+								className='border-b-2 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0'
+							/>
+							<input
+								type='email'
+								name='email'
+								placeholder='Email'
+								value={userData.email}
+								onChange={handleInputChange}
+								className='border-b-2 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0'
+							/>
+							<input
+								type='text'
+								name='house'
+								placeholder='дом'
+								value={userData.house}
+								onChange={handleInputChange}
+								className='border-b-2 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0'
+							/>
+							<input
+								type='tel'
+								name='phone'
+								placeholder='Телефон'
+								value={userData.phone}
+								onChange={handleInputChange}
+								className='border-b-2 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0'
+							/>
 						</div>
 
 						<button

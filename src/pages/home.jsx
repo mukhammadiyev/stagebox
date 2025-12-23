@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import BrandSlider from '../components/BrandSlider'
 import CompanyAdvantages from '../components/CompanyAdvantages'
@@ -10,12 +9,6 @@ function home() {
 	const { category } = useParams()
 	const location = useLocation()
 	const navigate = useNavigate()
-
-	useEffect(() => {
-		if (location.pathname == '/') {
-			navigate('crosses')
-		}
-	})
 
 	const categoryMap = {
 		clothes: 'mens-shirts',

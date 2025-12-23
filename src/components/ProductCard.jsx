@@ -29,10 +29,14 @@ export default function ProductCard({ product, loading }) {
 		)
 	}
 
+	const activeCategories = ['crosses', 'accesories', 'clothes']
+	const realCategory =
+		category == 'undefined' ? 'crosses' : activeCategories[category]
+
 	return (
 		<div
 			className='group relative h-[350px] w-full flex justify-center'
-			onClick={() => navigate(`/${category}/${product.id}`)}
+			onClick={() => navigate(`/${realCategory}/${product.id}`)}
 		>
 			{/* BASE CARD */}
 			<Card

@@ -3,6 +3,7 @@ import {
 	createRoutesFromElements,
 	Route,
 	RouterProvider,
+	Navigate
 } from 'react-router-dom'
 
 import App from '../App.jsx'
@@ -22,7 +23,7 @@ const Router = () => {
 		createRoutesFromElements(
 			<Route path='/' element={<App />}>
 				{/* Root home page */}
-				<Route index element={<Home />} />
+				<Route index element={<Navigate to="/crosses" replace />} />
 				{/* Dynamic category route */}
 				<Route path=':category' element={<Home />} />
 				<Route path=':category/:id' element={<ProductView />}>

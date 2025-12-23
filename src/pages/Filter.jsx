@@ -36,21 +36,31 @@ export default function Filter() {
 		limit: 40,
 	})
 
+	const slides = loading
+		? [...Array(9)].map((_, i) => ({ id: i, loading: true }))
+		: products
+
 	return (
-		<div className='container w-full mx-auto flex gap-6 py-10'>
+		<div className='container w-full mx-auto flex gap-6 py-10 '>
 			<div className='w-full px-8 lg:px-16 xl:px-24 py-12 flex gap-20'>
 				<FiltersSidebar filters={filters} setFilters={setFilters} />
 
-				<div className='flex-1'>
-					{loading && <p>Loading products...</p>}
-					{error && <p>Error: {error}</p>}
-					{!loading && !error && products.length === 0 && (
-						<p>No products found</p>
-					)}
-					<div className='grid grid-cols-3 gap-6'>
-						{products.map(p => (
-							<ProductCard product={p} loading={p.loading} />
-						))}
+				<div className='w-full flex flex-col gap-11'>
+					<div className='w-full flex items-center justify-between'>
+						<div className='flex items-center gap-6'>
+							<p className='text-[#B3C0D2] text-lg font-ruda '>Сортировка</p>
+						</div>
+					</div>
+					<div className='w-full flex-1'>
+						{error && <p>Error: {error}</p>}
+						{!loading && !error && products.length === 0 && (
+							<p>No products found</p>
+						)}
+						<div className='grid grid-cols-3 gap-6'>
+							{slides.map(p => (
+								<ProductCard product={p} loading={p.loading} />
+							))}
+						</div>
 					</div>
 				</div>
 			</div>

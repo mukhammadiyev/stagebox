@@ -37,7 +37,7 @@ export default function FiltersSidebar({ filters, setFilters }) {
 	}
 
 	return (
-		<div className='w-[260px]'>
+		<div className='w-[360px]'>
 			<form className='w-full flex flex-col gap-[70px]'>
 				<div className='flex flex-col items-start gap-9'>
 					<h1 className='text-[#002C6A] font-montserrat text-2xl font-semibold '>

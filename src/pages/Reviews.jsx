@@ -1,8 +1,11 @@
 import React from 'react'
+import NotFoundPage from '../components/NotFoundPage'
 
 function Reviews() {
 	return (
-		<div>Reviews</div>
+		<div>
+			<NotFoundPage/>
+		</div>
 	)
 }
 

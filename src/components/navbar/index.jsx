@@ -11,6 +11,7 @@ import ProfilePic from '../../icons/profile.svg'
 import MenuLinks from '../MenuLinks'
 function index() {
 	const [cartCount, setCartCount] = useState(0)
+	const [likeCount, setLikeCount] = useState(0)
 	const { category } = useParams()
 	const navigate = useNavigate()
 	console.log(category)
@@ -24,12 +25,17 @@ function index() {
 	const categories = ['crosses', 'clothes', 'accesories']
 
 	useEffect(() => {
-		setInterval(()=>{
+		setInterval(() => {
 			const cart = JSON.parse(localStorage.getItem('cart')) || []
-		// Sum all quantities
-		const total = cart.reduce((sum, item) => sum + item.quantity, 0)
-		setCartCount(total)
-		},10)
+			// Sum all quantities
+			const total = cart.reduce((sum, item) => sum + item.quantity, 0)
+			setCartCount(total)
+
+			const likedProducts =
+				JSON.parse(localStorage.getItem('likedProducts')) || []
+			// Sum all quantitie
+			setLikeCount(likedProducts.length)
+		}, 10)
 	}, []) // r
 	return !isMobile ? (
 		<nav className='w-full flex flex-col items-center'>
@@ -99,9 +105,9 @@ function index() {
 
 						<Link to='faworites' className='relative'>
 							<img src={heart} alt='favorites' className='w-11 h-11' />
-							{notify && (
+							{!notify && likeCount > 0 && (
 								<div className='min-w-5 h-5 flex items-center justify-center rounded-full absolute -top-1.5 -right-1.5 bg-[#FF1818] text-white px-1 text-xs'>
-									3
+									{likeCount}
 								</div>
 							)}
 						</Link>
@@ -118,17 +124,26 @@ function index() {
 				{/* Links */}
 				<MenuLinks device='desktop' />
 				{/* Search form */}
-				<form className='flex items-center w-[350px]'>
+				<form
+					className='flex items-center w-[350px]'
+					onSubmit={e => {
+						e.preventDefault()
+						navigate(`/search?query=${searchterm}`)
+					}}
+				>
 					<input
-						about='Поиск'
 						placeholder='Поиск'
 						type='text'
 						className='bg-[#FFFFFF] border border-[#29292D1A] w-full max-w-[255px] h-10 rounded-l-full px-6 py-2'
-						onChange={e => setSearchterm(e.target.value)}
 						value={searchterm}
+						onChange={e => setSearchterm(e.target.value)}
 					/>
-					<button className='w-[95px] h-10 rounded-r-full bg-[#29292D] flex items-center justify-center '>
-						<IoMdSearch className='text-white w-[27px] h-[27px] font-bold' />
+
+					<button
+						className='w-[95px] h-10 rounded-r-full bg-[#29292D] flex items-center justify-center'
+						type='submit'
+					>
+						<IoMdSearch className='text-white w-[27px] h-[27px]' />
 					</button>
 				</form>
 			</div>
@@ -222,11 +237,12 @@ function index() {
 					<button
 						onClick={() => {
 							if (searchterm) {
-								navigate('search')
+								navigate(`/search?query=${searchterm}`)
 							} else {
 								setIsFindActive(false)
 							}
 						}}
+						type='button'
 						className='w-[55px] h-[35px] text-white bg-[#FF1818] flex items-center justify-between gap-0.5 rounded-r-full text-[13px] font-bold font-montserrat px-4'
 					>
 						{searchterm ? (

@@ -20,6 +20,14 @@ export default function productView() {
 	]
 	// for thumbs
 	const [thumbsSwiper, setThumbsSwiper] = useState(null)
+	const [liked, setLiked] = useState(false)
+
+	useEffect(() => {
+		const likedProducts =
+			JSON.parse(localStorage.getItem('likedProducts')) || []
+		const isLiked = likedProducts.some(p => p.id === product?.id)
+		setLiked(isLiked)
+	}, [product])
 
 	useEffect(() => {
 		fetch(`https://dummyjson.com/products/${id}`)
@@ -72,6 +80,21 @@ export default function productView() {
 	}
 
 	const currentCategory = categoryMap[category] || 'mens-shoes'
+
+	const toggleLike = () => {
+	const likedProducts = JSON.parse(localStorage.getItem('likedProducts')) || []
+
+	if (!liked) {
+		if (!likedProducts.find(p => p.id === product.id)) likedProducts.push(product)
+		setLiked(true)
+	} else {
+		const index = likedProducts.findIndex(p => p.id === product.id)
+		if (index !== -1) likedProducts.splice(index, 1)
+		setLiked(false)
+	}
+
+	localStorage.setItem('likedProducts', JSON.stringify(likedProducts))
+}
 
 	return (
 		<div className='container w-full mx-auto'>
@@ -154,8 +177,8 @@ export default function productView() {
 							</div>
 						</div>
 						<div className='w-full flex flex-col gap-4 justify-center items-center'>
-							<button className='text-2xl font-montserrat border-2 flex gap-2.5 items-center justify-center w-max py-5 px-16 rounded-full border-[#FF1818] bg-[#FF1818] text-white hover:text-[#FF1818] hover:bg-white cursor-pointer transition'>
-								Нравиться <FiHeart />
+							<button className='text-2xl font-montserrat border-2 flex gap-2.5 items-center justify-center w-max py-5 px-16 rounded-full border-[#FF1818] bg-[#FF1818] text-white hover:text-[#FF1818] hover:bg-white cursor-pointer transition'onClick={toggleLike} >
+								{liked ? 'Не нравится' : 'Нравится'} <FiHeart />
 							</button>
 							<button
 								className={`text-2xl font-montserrat border-2 flex gap-2.5 items-center justify-center w-max py-5 px-16 rounded-full border-[#002C6A] bg-[#002C6A] text-white 

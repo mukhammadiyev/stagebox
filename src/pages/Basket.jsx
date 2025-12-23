@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { BsFillBasketFill } from 'react-icons/bs'
 import { FaMinus, FaPlus } from 'react-icons/fa'
 import { IoCloseSharp } from 'react-icons/io5'
-
+import { v4 as uuidv4 } from 'uuid'
 function Basket() {
 	const [cart, setCart] = useState([])
 
@@ -18,6 +18,24 @@ function Basket() {
 		street: '',
 		house: '',
 	})
+
+	const months = [
+		'Январь',
+		'Февраль',
+		'Mарт',
+		'Апрель',
+		'Mая',
+		'Июнь',
+		'Июль',
+		'Август',
+		'Сентябрь',
+		'Октябрь',
+		'Ноябрь',
+		'Декабрь',
+	]
+
+	const getData = new Date()
+	const nowMonth = months[getData.getMonth()]
 
 	// Load cart and user data from localStorage when component mounts
 	useEffect(() => {
@@ -56,6 +74,10 @@ function Basket() {
 			userData,
 			total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
 			date: new Date().toISOString(),
+			orderedDay: new Date().getDate(),
+			year: new Date().getFullYear().toString(),
+			month: nowMonth,
+			orderId: uuidv4(),
 		}
 
 		// Get existing orders

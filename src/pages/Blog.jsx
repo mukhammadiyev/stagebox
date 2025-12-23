@@ -1,5 +1,9 @@
+import NotFoundPage from '../components/NotFoundPage'
+
 function Blog() {
-	return <div>Blog</div>
+	return <div>
+		<NotFoundPage/>
+	</div>
 }
 
 export default Blog

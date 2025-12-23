@@ -4,22 +4,27 @@ import { cn } from '@/lib/utils'
 import { useState } from 'react'
 import { IoMdHeart } from 'react-icons/io'
 import { useNavigate, useParams } from 'react-router-dom'
+
 export default function ProductCard({ product, loading }) {
 	const { category } = useParams()
 	const navigate = useNavigate()
 	const sizes = [36, 37, 38, 39, 40, 41, 42, 43]
-	const [liked, setLiked] = useState(false)
+
+	// Initialize liked state from localStorage
+	const [liked, setLiked] = useState(() => {
+		const storedProducts =
+			JSON.parse(localStorage.getItem('likedProducts')) || []
+		return storedProducts.some(p => p.id === product.id)
+	})
+
 	if (loading) {
 		return (
 			<div className='group relative h-[350px] w-full flex justify-center'>
 				<Card className='relative rounded-[20px] w-full max-w-[280px] h-[350px] overflow-hidden p-0!'>
 					<CardContent className='flex flex-col justify-between p-0!'>
-						{/* Image Skeleton */}
 						<Skeleton className='w-full h-[180px] rounded-t-[20px] bg-gray-300 animate-pulse' />
 						<div className='w-full p-6 flex flex-col gap-2'>
-							{/* Title Skeleton */}
 							<Skeleton className='h-6 w-full rounded-md bg-gray-300 animate-pulse' />
-							{/* Price Skeleton */}
 							<Skeleton className='h-6 w-1/2 rounded-md bg-gray-300 animate-pulse' />
 							<Skeleton className=' mt-2 h-8 w-full rounded-md bg-gray-300 animate-pulse' />
 						</div>
@@ -29,12 +34,28 @@ export default function ProductCard({ product, loading }) {
 		)
 	}
 
+	// Handle like toggle and localStorage update
+	const handleLike = () => {
+		const newLiked = !liked
+		setLiked(newLiked)
+
+		const storedProducts =
+			JSON.parse(localStorage.getItem('likedProducts')) || []
+
+		if (newLiked) {
+			if (!storedProducts.find(p => p.id === product.id)) {
+				storedProducts.push(product)
+			}
+		} else {
+			const index = storedProducts.findIndex(p => p.id === product.id)
+			if (index !== -1) storedProducts.splice(index, 1)
+		}
+
+		localStorage.setItem('likedProducts', JSON.stringify(storedProducts))
+	}
+
 	return (
-		<div
-			className='group relative h-[350px] w-full flex justify-center'
-			onClick={() => navigate(`/${category}/${product.id}`)}
-		>
-			{/* BASE CARD */}
+		<div className='group relative h-[350px] w-full flex justify-center'>
 			<Card
 				className={cn(
 					'relative rounded-[20px] cursor-pointer',
@@ -43,11 +64,16 @@ export default function ProductCard({ product, loading }) {
 				)}
 			>
 				<CardContent className='flex flex-col justify-between p-0!'>
-					<img
-						src={product.images[0]}
-						alt=''
-						className='w-full h-[180px] rounded-t-[20px] object-contain '
-					/>
+					<div
+						className='w-full'
+						onClick={() => navigate(`/${category}/${product.id}`)}
+					>
+						<img
+							src={product.images[0]}
+							alt=''
+							className='w-full h-[180px] rounded-t-[20px] object-contain'
+						/>
+					</div>
 					<div className='w-full p-6 flex flex-col'>
 						<h1 className='w-full h-11 text-[16px] font-semibold font-montserrat leading-[100%] flex flex-wrap overflow-hidden'>
 							{product.title.length > 40
@@ -57,16 +83,14 @@ export default function ProductCard({ product, loading }) {
 						<h2 className='font-ruda text-[#B3C0D2] text-xs mb-3.5 '>
 							Артикул 19666
 						</h2>
-						<div className=' w-full flex justify-between items-center'>
+						<div className='w-full flex justify-between items-center'>
 							<p className='text-[#FF1818] font-montserrat text-2xl font-semibold '>
 								{product.price} ₽
 							</p>
 							<IoMdHeart
-								onClick={() => {
-									setLiked(!liked)
-								}}
+								onClick={handleLike}
 								className={`w-8 h-7 ${
-									liked === true ? 'text-[#FF1818]' : 'text-[#B3C0D2]'
+									liked ? 'text-[#FF1818]' : 'text-[#B3C0D2]'
 								}`}
 							/>
 						</div>
@@ -74,7 +98,6 @@ export default function ProductCard({ product, loading }) {
 				</CardContent>
 			</Card>
 
-			{/* HOVER EXPANSION CARD */}
 			<Card
 				className={cn(
 					'absolute top-2! rounded-[20px] cursor-pointer',
@@ -88,7 +111,8 @@ export default function ProductCard({ product, loading }) {
 					<img
 						src={product.images[1] ?? product.images[0]}
 						alt=''
-						className='w-full h-[220px] rounded-t-[20px] object-contain object-center '
+						className='w-full h-[220px] rounded-t-[20px] object-contain object-center'
+						onClick={() => navigate(`/${category}/${product.id}`)}
 					/>
 					<div className='w-full p-6 flex flex-col'>
 						<h1 className='w-full h-11 text- font-semibold font-montserrat leading-[120%]'>
@@ -99,16 +123,14 @@ export default function ProductCard({ product, loading }) {
 						<h2 className='font-ruda text-[#B3C0D2] text-xs mb-3.5 '>
 							Артикул 19666
 						</h2>
-						<div className=' w-full flex justify-between items-center'>
+						<div className='w-full flex justify-between items-center'>
 							<p className='text-[#FF1818] font-montserrat text-2xl font-semibold '>
 								{product.price} ₽
 							</p>
 							<IoMdHeart
-								onClick={() => {
-									setLiked(!liked)
-								}}
+								onClick={handleLike}
 								className={`w-8 h-7 ${
-									liked === true ? 'text-[#FF1818]' : 'text-[#B3C0D2]'
+									liked ? 'text-[#FF1818]' : 'text-[#B3C0D2]'
 								}`}
 							/>
 						</div>

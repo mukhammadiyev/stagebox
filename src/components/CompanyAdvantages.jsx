@@ -25,18 +25,18 @@ function CompanyAdvantages() {
 	]
 	return (
 		<div className='w-full container mx-auto'>
-			<div className='w-full py-6 xl:py-8 2xl:py-16  px-8 lg:px-16 xl:px-25 2xl:px-30'>
+			<div className='w-full py-0 pb-2 2xl:py-16  px-8 lg:px-16 xl:px-25 2xl:px-30'>
 				<div className='flex items-center justify-evenly flex-wrap'  >
 					{advantages.map((adv, idx) => {
 						return (
-							<div className='w-[280px] flex flex-col gap-10 items-center' key={idx}>
+							<div className='w-[86px] 2xl:w-[280px] flex flex-col gap-3 2xl:gap-10 items-center' key={idx}>
 								<div
-									className={`h-36 w-36 rounded-full flex items-center justify-center`}
+									className={`h-11 2xl:h-36 w-11 2xl:w-36 rounded-full flex items-center justify-center`}
 									style={{backgroundColor : adv.bgColor}}
 								>
-									<img src={adv.icon} alt="icon" className='w-22 h-22' />
+									<img src={adv.icon} alt="icon" className='h-6 2xl:h-22 w-6 2xl:w-22' />
 								</div>
-								<h3 className='w-full  text-wrap text-4xl font-semibold font-montserrat text-center text-[#002C6A]' >{adv.title}</h3>
+								<h3 className='w-full  text-wrap text-xs 2xl:text-4xl font-semibold font-montserrat text-center text-[#002C6A]' >{adv.title}</h3>
 							</div>
 						)
 					})}

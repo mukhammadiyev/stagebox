@@ -14,13 +14,11 @@ function index() {
 	const [likeCount, setLikeCount] = useState(0)
 	const { category } = useParams()
 	const navigate = useNavigate()
-	console.log(category)
 	const [notify, setNotify] = useState(false)
 	const [isFindActive, setIsFindActive] = useState(false)
 	const [searchterm, setSearchterm] = useState('')
 	const location = useLocation()
 	const isMobile = useMediaQuery('(max-width:760px)')
-	isMobile ? console.log('mobile') : console.log('desktop')
 
 	const categories = ['crosses', 'clothes', 'accesories']
 

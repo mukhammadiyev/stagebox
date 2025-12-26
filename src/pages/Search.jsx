@@ -36,8 +36,8 @@ export default function Search() {
   if (error) return <h2>{error}</h2>
 
   return (
-    <div className="w-full container mx-auto px-8 lg:px-16 xl:px-25 2xl:px-30 pt-20 pb-40">
-      <h1 className="text-4xl font-semibold mb-8">
+    <div className="w-full container mx-auto px-8 lg:px-16 xl:px-25 2xl:px-30 py-4 2xl:pt-20 pb-40">
+      <h1 className="text-base 2xl:text-4xl font-semibold mb-4 2xl:mb-8">
         Поиск: <span className="text-red-600">{query}</span>
       </h1>
 
@@ -45,7 +45,7 @@ export default function Search() {
         <h2 className="text-xl">Ничего не найдено</h2>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
         {filtered.map(product => (
           <ProductCard key={product.id} product={product} loading={false} />
         ))}

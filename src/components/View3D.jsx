@@ -27,7 +27,7 @@ function View3D({ object, sizes }) {
 	// Don't even track scroll state
 	
 	return (
-		<div className='w-[700px] h-[550px] rounded-xl overflow-hidden bg-transparent flex items-center justify-center'>
+		<div className='w-[180px] 2xl:w-[700px] h-40 2xl:h-[550px] rounded-xl overflow-hidden bg-transparent flex items-center justify-center'>
 			<Canvas 
 				shadows 
 				camera={{ position: [3, 3, 3], fov: 45 }}
@@ -48,7 +48,7 @@ function View3D({ object, sizes }) {
 					makeDefault
 					enableDamping
 					dampingFactor={0.05}
-					enableRotate={false} // Disable user rotation
+					enableRotate={false} // Disable user rotationnpm r
 				/>
 			</Canvas>
 		</div>

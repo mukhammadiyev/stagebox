@@ -4,11 +4,12 @@ import CompanyAdvantages from '../components/CompanyAdvantages'
 import MiniBlog from '../components/MiniBlog'
 import ShoeSlider3D from '../components/ShoeSlider3D'
 import ViewProductsSlider from '../components/ViewProductsSlider'
-
+import { useMediaQuery } from '../hooks/useMediaQuery'
 function home() {
 	const { category } = useParams()
 	const location = useLocation()
 	const navigate = useNavigate()
+	const mobile = useMediaQuery('(max-width:760px)')
 
 	const categoryMap = {
 		clothes: 'mens-shirts',

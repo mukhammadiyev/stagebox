@@ -3,9 +3,9 @@ import { NavLink, Outlet } from 'react-router-dom'
 function UserPersonal() {
 	return (
 		<div className='w-full container mx-auto '>
-			<div className='w-full py-20 px-8 lg:px-16 xl:px-25 2xl:px-30 '>
-				<div className='w-full flex'>
-					<div className='flex flex-col gap-2'>
+			<div className='w-full py-5 2xl:py-20 px-8 lg:px-16 xl:px-25 2xl:px-30 '>
+				<div className='w-full flex 2xl:flex-row flex-col '>
+					<div className='flex 2xl:flex-col flex-row gap-2'>
 						<NavLink
 							to={'profile'}
 							className={({ isActive }) =>

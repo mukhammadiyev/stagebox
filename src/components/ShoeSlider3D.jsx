@@ -44,7 +44,7 @@ function ShoeSlider3D() {
 			<img
 				src={bgDec}
 				alt='background decoration'
-				className='absolute right-0 top-8 z-0'
+				className='absolute right-0 top-8 z-0 w-[220px] h-40 2xl:w-[800px] 2xl:h-[550px] '
 			/>
 			<div className='w-full container mx-auto'>
 				<div className='w-full px-8 lg:px-16 xl:px-25 2xl:px-30'>
@@ -63,15 +63,15 @@ function ShoeSlider3D() {
 						{slides.map(slide => {
 							return (
 								<SwiperSlide key={slide.id}>
-									<div className='w-full h-[650px] flex items-center justify-between'>
+									<div className='w-full h-[220px] 2xl:h-[650px] flex items-center justify-between'>
 										<div className='w-1/2 max-w-[540px] flex flex-col gap-0 items-start justify-center'>
-											<div className='flex flex-col font-montserrat uppercase text-[#002C6A] font-extrabold text-7xl '>
+											<div className='flex flex-col font-montserrat uppercase text-[#002C6A] font-extrabold text-xl 2xl:text-7xl '>
 												<span>{slide.brand}</span> {slide.theme}
 											</div>
-											<h2 className='w-10/12 font-ruda text-4xl font-normal my-9 text-[#29292D] '>
+											<h2 className='w-10/12 font-ruda text-xs 2xl:text-4xl font-normal my-3 2xl:my-9 text-[#29292D] '>
 												Городские кроссовки в ярком стиле 80-х
 											</h2>
-											<button className='cursor-pointer bg-[#FF1818] rounded-full border-2 border-[#FF1818] text-white font-montserrat font-medium text-2xl px-13 py-7 hover:bg-transparent hover:text-[#FF1818] transition'>
+											<button className='hidden xl:block cursor-pointer bg-[#FF1818] rounded-full border-2 border-[#FF1818] text-white font-montserrat font-medium text-2xl px-13 py-7 hover:bg-transparent hover:text-[#FF1818] transition'>
 												Смотреть все
 											</button>
 										</div>
@@ -83,13 +83,13 @@ function ShoeSlider3D() {
 					</Swiper>
 
 					{/* ⬅️ CUSTOM PAGINATION ADDED HERE */}
-					<div className='w-full mt-0 mb-10 flex items-center justify-end gap-40 cursor-pointer'>
+					<div className='w-full mt-0 mb-10 flex items-center justify-end gap-10 2xl:gap-40 cursor-pointer'>
 						{slides.map((slide, index) => (
 							<div
 								key={slide.id}
 								onClick={() => swiperRef.current.slideTo(index)}
-								className={`relative w-[280px] h-21.5
-										items-center gap-4 px-6 py-5.5 flex justify-center rounded-[40px]
+								className={`relative w-40 2xl:w-[280px] h-9 2xl:h-21.5
+										items-center gap-4 px-8 2xl:px-6 py-1 2xl:py-5.5 flex justify-end 2xl:justify-center rounded-[40px]
 											shadow-[0_4px_25px_rgba(0,0,0,0.1)]
 											transition
 											${activeIndex === index ? 'hidden' : 'bg-white'}
@@ -97,13 +97,13 @@ function ShoeSlider3D() {
 							>
 								<img
 									src={slide.inactivePic}
-									className='absolute w-[140px] h-[120px] bottom-2.5 -left-18'
+									className='absolute w-15 2xl:w-[140px] h-15  2xl:h-[120px] bottom-0 2xl:bottom-2.5 -left-6 2xl:-left-18'
 								/>
-								<div className='text-left uppercase text-xl font-extrabold text-[#1C1C1E]'>
+								<div className='text-left uppercase text-[9px] 2xl:text-xl font-extrabold text-[#1C1C1E]'>
 									{slide.brand} <br /> {slide.theme}
 								</div>
 								{/* SMALL RED CIRCLE ARROW */}
-								<div className='absolute -right-6 -top-6 w-12.5 h-12.5 rounded-full bg-[#FF1818] flex items-center justify-center'>
+								<div className='hidden absolute -right-6 -top-6 w-12.5 h-12.5 rounded-full bg-[#FF1818] 2xl:flex items-center justify-center'>
 									<span className='text-white text-xl font-bold'>
 										<GrLinkNext />
 									</span>

@@ -7,11 +7,13 @@ import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import useProducts from '../hooks/useProducts'
 import ProductCard from './ProductCard'
+import { useMediaQuery } from '../hooks/useMediaQuery'
 
 export default function ViewProductsSlider({ forPr, theme }) {
 	const { products, loading, error } = useProducts({ forPr: forPr })
 	const prevRef = useRef(null)
 	const nextRef = useRef(null)
+	const mobile = useMediaQuery('(max-width:760px)')
 
 	if (error) {
 		return <div className='text-center py-20 text-red-500'>{error}</div>
@@ -24,13 +26,13 @@ export default function ViewProductsSlider({ forPr, theme }) {
 	return (
 		<div className='w-full container mx-auto'>
 			<div className='px-8 lg:px-16 xl:px-24 py-12'>
-				<h1 className='text-[#002C6A] text-5xl font-bold mb-8'>{theme}</h1>
+				<h1 className='text-[#002C6A] text-lg 2xl:text-5xl font-bold mb-3 2xl:mb-8'>{theme}</h1>
 
 				<div className='w-full container mx-auto relative'>
 					{/* LEFT ARROW */}
 					<button
 						ref={prevRef}
-						className='swiper-prev absolute -left-8 top-1/2 -translate-y-1/2 z-50
+						className='hidden 2xl:block swiper-prev absolute -left-8 top-1/2 -translate-y-1/2 z-50
         [&.swiper-button-disabled>svg]:text-[#B3C0D2]
         [&>svg]:text-[#FF1818] cursor-pointer'
 					>
@@ -39,7 +41,7 @@ export default function ViewProductsSlider({ forPr, theme }) {
 
 					<button
 						ref={nextRef}
-						className='swiper-next absolute -right-8 top-1/2 -translate-y-1/2 z-50
+						className='hidden 2xl:block swiper-next absolute -right-8 top-1/2 -translate-y-1/2 z-50
         [&.swiper-button-disabled>svg]:text-[#B3C0D2]
         [&>svg]:text-[#FF1818] cursor-pointer'
 					>
@@ -48,16 +50,16 @@ export default function ViewProductsSlider({ forPr, theme }) {
 
 					<Swiper
 						modules={[Navigation, Pagination]}
-						spaceBetween={30}
-						slidesPerView={4}
-						allowTouchMove={false}
+						spaceBetween={mobile ? 10 : 30}
+						slidesPerView={mobile ? 2 : 4}
+						allowTouchMove={true}
 						pagination={{
 							clickable: true,
 							renderBullet: (index, className) =>
-								`<button class="${className} custom-dot w-2.5 h-2.5 not-last:mr-20!  "></button>`,
+								`<button class="${className} custom-dot w-2.5 h-2.5 not-last:mr-10! 2xl:not-last:mr-20!  "></button>`,
 						}}
-						navigation={true}
-						className='w-full overflow-visible h-[520px]'
+						navigation={mobile ? false : true}
+						className='w-full overflow-visible h-[310px] 2xl:h-[520px]'
 						onBeforeInit={swiper => {
 							swiper.params.navigation.prevEl = prevRef.current
 							swiper.params.navigation.nextEl = nextRef.current

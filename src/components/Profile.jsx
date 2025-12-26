@@ -89,11 +89,11 @@ function Profile() {
 		initialUser && JSON.stringify(user) !== JSON.stringify(initialUser)
 
 	return (
-		<div className='flex  flex-1  p-8 '>
+		<div className='flex flex-1 px-0 py-6 2xl:p-8 '>
 			<form onSubmit={handleSubmit} className='w-full flex flex-col gap-15'>
-				<div className='w-full flex gap-20'>
+				<div className='w-full flex flex-col 2xl:flex-row gap-20'>
 					<div className='flex-1 flex flex-col gap-8'>
-						<p className=' text-2xl text-[#002C6A] font-montserrat font-semibold '>
+						<p className='  2xl:text-2xl text-[#002C6A] font-montserrat font-semibold '>
 							Личные данные
 						</p>
 
@@ -102,7 +102,7 @@ function Profile() {
 							placeholder='Фамилия'
 							value={user.lastName}
 							onChange={e => updateField('lastName', e.target.value)}
-							className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:text-2xl text-2xl'
+							className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:2xl:text-2xl  2xl:text-2xl text-base'
 						/>
 
 						<input
@@ -110,7 +110,7 @@ function Profile() {
 							placeholder='Имя'
 							value={user.name}
 							onChange={e => updateField('name', e.target.value)}
-							className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:text-2xl text-2xl'
+							className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:2xl:text-2xl  2xl:text-2xl text-base'
 						/>
 
 						<input
@@ -118,12 +118,12 @@ function Profile() {
 							placeholder='Отчество'
 							value={user.middleName}
 							onChange={e => updateField('middleName', e.target.value)}
-							className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:text-2xl text-2xl'
+							className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:2xl:text-2xl  2xl:text-2xl text-base'
 						/>
 					</div>
 
 					<div className='flex-1 flex flex-col gap-8'>
-						<p className=' text-2xl text-[#002C6A] font-montserrat font-semibold '>
+						<p className='  2xl:text-2xl text-[#002C6A] font-montserrat font-semibold '>
 							Изменить пароль
 						</p>
 
@@ -133,7 +133,7 @@ function Profile() {
 								placeholder='Старый пароль'
 								value={oldPassword}
 								onChange={e => setOldPassword(e.target.value)}
-								className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:text-2xl text-2xl'
+								className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:2xl:text-2xl  2xl:text-2xl text-base'
 							/>
 						)}
 
@@ -142,7 +142,7 @@ function Profile() {
 							placeholder='Новый пароль'
 							value={newPassword}
 							onChange={e => setNewPassword(e.target.value)}
-							className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:text-2xl text-2xl'
+							className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:2xl:text-2xl  2xl:text-2xl text-base'
 						/>
 
 						<input
@@ -150,23 +150,23 @@ function Profile() {
 							placeholder='Повторите пароль'
 							value={repeatPassword}
 							onChange={e => setRepeatPassword(e.target.value)}
-							className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:text-2xl text-2xl'
+							className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:2xl:text-2xl  2xl:text-2xl text-base'
 						/>
 					</div>
 				</div>
 
 				<div className='w-full flex flex-col gap-10'>
-					<p className=' text-2xl text-[#002C6A] font-montserrat font-semibold '>
+					<p className='  2xl:text-2xl text-[#002C6A] font-montserrat font-semibold '>
 						Адрес доставки и контакты
 					</p>
 
-					<div className='w-full grid grid-cols-2 gap-x-20 gap-y-8 '>
+					<div className='w-full grid grid-cols-1 2xl:grid-cols-2 gap-x-20 gap-y-8 '>
 						<input
 							type='text'
 							placeholder='Провинция'
 							value={user.province}
 							onChange={e => updateField('province', e.target.value)}
-							className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:text-2xl text-2xl'
+							className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:2xl:text-2xl  2xl:text-2xl text-base'
 						/>
 
 						<input
@@ -174,7 +174,7 @@ function Profile() {
 							placeholder='Электронная почта'
 							value={user.email}
 							onChange={e => updateField('email', e.target.value)}
-							className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:text-2xl text-2xl'
+							className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:2xl:text-2xl  2xl:text-2xl text-base'
 						/>
 
 						<input
@@ -182,7 +182,7 @@ function Profile() {
 							placeholder='Город'
 							value={user.city}
 							onChange={e => updateField('city', e.target.value)}
-							className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:text-2xl text-2xl'
+							className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:2xl:text-2xl  2xl:text-2xl text-base'
 						/>
 
 						<input
@@ -190,7 +190,7 @@ function Profile() {
 							placeholder='Номер телефона'
 							value={user.phone}
 							onChange={e => updateField('phone', e.target.value)}
-							className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:text-2xl text-2xl'
+							className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:2xl:text-2xl  2xl:text-2xl text-base'
 						/>
 
 						<input
@@ -198,7 +198,7 @@ function Profile() {
 							placeholder='Улица'
 							value={user.street}
 							onChange={e => updateField('street', e.target.value)}
-							className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:text-2xl text-2xl'
+							className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:2xl:text-2xl  2xl:text-2xl text-base'
 						/>
 
 						<input
@@ -206,14 +206,14 @@ function Profile() {
 							placeholder='Дом'
 							value={user.house}
 							onChange={e => updateField('house', e.target.value)}
-							className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:text-2xl text-2xl'
+							className='border-b-3 border-[#002C6A] outline-none pt-1 pb-2 pr-3 pl-0 placeholder:2xl:text-2xl  2xl:text-2xl text-base'
 						/>
 					</div>
 				</div>
 
 				<button
 					disabled={!isChanged}
-					className={`bg-[#FF1818] text-2xl text-white px-13 py-7 rounded-full transition w-max
+					className={`bg-[#FF1818]  2xl:text-2xl text-white px-13 py-7 rounded-full transition w-max
     ${
 			!isChanged
 				? 'opacity-50 cursor-not-allowed'

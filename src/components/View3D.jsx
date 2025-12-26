@@ -48,7 +48,7 @@ function View3D({ object, sizes }) {
 					makeDefault
 					enableDamping
 					dampingFactor={0.05}
-					enableRotate={false} // Disable user rotationnpm r
+					enableRotate={true} // Disable user rotationnpm r
 				/>
 			</Canvas>
 		</div>

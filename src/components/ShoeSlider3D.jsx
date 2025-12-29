@@ -1,43 +1,81 @@
-import { useRef, useState } from 'react' // ⬅️ ADDED
+import { useMemo, useRef, useState } from 'react' // ⬅️ ADDED useMemo
 import { GrLinkNext } from 'react-icons/gr'
+import { useLocation } from 'react-router-dom' // ⬅️ ADDED
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import AirMax2D from '../assets/air_max_2d.png'
+import hoodie2D from '../assets/hoodie.png'
+import jacjet2D from '../assets/jacket.jpg'
+import thsirt2D from '../assets/tshirt.jpg'
 import bgDec from '../assets/bg_dec.png'
 import NiteJogger2D from '../assets/nite_jogger_2d.png'
 import yeezyr2D from '../assets/yeezy_2d.png'
 import View3D from './View3D'
 
-function ShoeSlider3D() {
-	const slides = [
-		{
-			id: 1,
-			theme: 'Nite Jogger',
-			inactivePic: NiteJogger2D,
-			brand: 'Adidas',
-			activated3D: 'models/adidas_nite_jogger2.glb',
-		},
-		{
-			id: 2,
-			theme: 'Yeezy Boost ',
-			inactivePic: yeezyr2D,
-			brand: 'Adidas',
-			activated3D: 'models/adidas_yeezy_boost.glb',
-		},
-		{
-			id: 3,
-			theme: 'Air Max',
-			inactivePic: AirMax2D,
-			brand: 'Nike',
-			activated3D: 'models/nike_air_max.glb',
-		},
-	]
+// Define other slide arrays
+const crossesSlides = [
+	{
+		id: 1,
+		theme: 'Nite Jogger',
+		inactivePic: NiteJogger2D,
+		brand: 'Adidas',
+		activated3D: 'models/adidas_nite_jogger2.glb',
+	},
+	{
+		id: 2,
+		theme: 'Yeezy Boost',
+		inactivePic: yeezyr2D,
+		brand: 'Adidas',
+		activated3D: 'models/adidas_yeezy_boost.glb',
+	},
+	{
+		id: 3,
+		theme: 'Air Max',
+		inactivePic: AirMax2D,
+		brand: 'Nike',
+		activated3D: 'models/nike_air_max.glb',
+	},
+]
 
-	const swiperRef = useRef(null) // ⬅️ ADDED
-	const [activeIndex, setActiveIndex] = useState(0) // ⬅️ ADDED
+const clothesSlides = [
+	{
+		id: 1,
+		theme: 'Hoodie',
+		inactivePic: hoodie2D,
+		brand: 'Adidas',
+		activated3D: 'models/hoodie.glb',
+	},
+	{
+		id: 2,
+		theme: 'Jacket',
+		inactivePic: jacjet2D,
+		brand: 'Nike',
+		activated3D: 'models/jacket.glb',
+	},
+	{
+		id: 3,
+		theme: 'T-shirt',
+		inactivePic: thsirt2D,
+		brand: 'Puma',
+		activated3D: 'models/tshirt.glb',
+	},
+]
+
+function ShoeSlider3D() {
+	const location = useLocation() // ⬅️ ADDED
+	const swiperRef = useRef(null)
+	const [activeIndex, setActiveIndex] = useState(0)
+
+	// Choose slides based on current pathname
+	const slides = useMemo(() => {
+		const path = location.pathname.toLowerCase()
+		if (path.includes('crosses')) return crossesSlides
+		if (path.includes('clothes')) return clothesSlides
+		return crossesSlides // default fallback
+	}, [location.pathname])
 
 	return (
 		<div className='w-full min-h-full relative'>
@@ -56,33 +94,30 @@ function ShoeSlider3D() {
 						loop={false}
 						autoplay={{ delay: 50000 }}
 						className='rounded-xl'
-						// ⬅️ ADDED
 						onSwiper={s => (swiperRef.current = s)}
 						onSlideChange={s => setActiveIndex(s.activeIndex)}
 					>
-						{slides.map(slide => {
-							return (
-								<SwiperSlide key={slide.id}>
-									<div className='w-full h-[220px] 2xl:h-[650px] flex items-center justify-between'>
-										<div className='w-1/2 max-w-[540px] flex flex-col gap-0 items-start justify-center'>
-											<div className='flex flex-col font-montserrat uppercase text-[#002C6A] font-extrabold text-xl 2xl:text-7xl '>
-												<span>{slide.brand}</span> {slide.theme}
-											</div>
-											<h2 className='w-10/12 font-ruda text-xs 2xl:text-4xl font-normal my-3 2xl:my-9 text-[#29292D] '>
-												Городские кроссовки в ярком стиле 80-х
-											</h2>
-											<button className='hidden xl:block cursor-pointer bg-[#FF1818] rounded-full border-2 border-[#FF1818] text-white font-montserrat font-medium text-2xl px-13 py-7 hover:bg-transparent hover:text-[#FF1818] transition'>
-												Смотреть все
-											</button>
+						{slides.map(slide => (
+							<SwiperSlide key={slide.id}>
+								<div className='w-full h-[220px] 2xl:h-[650px] flex items-center justify-between'>
+									<div className='w-1/2 max-w-[540px] flex flex-col gap-0 items-start justify-center'>
+										<div className='flex flex-col font-montserrat uppercase text-[#002C6A] font-extrabold text-xl 2xl:text-7xl '>
+											<span>{slide.brand}</span> {slide.theme}
 										</div>
-										<View3D object={slide.activated3D} sizes={[2, 1, 1]} />
+										<h2 className='w-10/12 font-ruda text-xs 2xl:text-4xl font-normal my-3 2xl:my-9 text-[#29292D] '>
+											Городские кроссовки в ярком стиле 80-х
+										</h2>
+										<button className='hidden xl:block cursor-pointer bg-[#FF1818] rounded-full border-2 border-[#FF1818] text-white font-montserrat font-medium text-2xl px-13 py-7 hover:bg-transparent hover:text-[#FF1818] transition'>
+											Смотреть все
+										</button>
 									</div>
-								</SwiperSlide>
-							)
-						})}
+									<View3D object={slide.activated3D} sizes={[2, 1, 1]} />
+								</div>
+							</SwiperSlide>
+						))}
 					</Swiper>
 
-					{/* ⬅️ CUSTOM PAGINATION ADDED HERE */}
+					{/* ⬅️ CUSTOM PAGINATION */}
 					<div className='w-full mt-0 mb-10 flex items-center justify-end gap-10 2xl:gap-40 cursor-pointer'>
 						{slides.map((slide, index) => (
 							<div
@@ -102,7 +137,6 @@ function ShoeSlider3D() {
 								<div className='text-left uppercase text-[9px] 2xl:text-xl font-extrabold text-[#1C1C1E]'>
 									{slide.brand} <br /> {slide.theme}
 								</div>
-								{/* SMALL RED CIRCLE ARROW */}
 								<div className='hidden absolute -right-6 -top-6 w-12.5 h-12.5 rounded-full bg-[#FF1818] 2xl:flex items-center justify-center'>
 									<span className='text-white text-xl font-bold'>
 										<GrLinkNext />

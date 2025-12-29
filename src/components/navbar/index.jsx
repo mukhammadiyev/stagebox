@@ -158,7 +158,10 @@ function index() {
 			{/* Navbar-main */}
 			<div className='w-full flex relative px-5'>
 				<div className=' absolute -top-6'>
-					<div className='flex justify-center items-center w-12 h-12  bg-black rounded-full'>
+					<div
+						className='flex justify-center items-center w-12 h-12  bg-black rounded-full'
+						onClick={() => navigate('/crosses')}
+					>
 						<div className='flex flex-col items-center justify-center border border-red-500 w-7/12 h-7/12'>
 							<p className='text-white text-[5px] font-molengo'>STAGE</p>
 							<p className='text-white text-[5px] font-molengo'>STAGE</p>
@@ -192,18 +195,18 @@ function index() {
 							className='w-[35px] h-[35px] rounded-full bg-[#29292D] relative flex items-center justify-center'
 						>
 							<img src={shoppingBag} alt='shopping bag' className='w-4 h-5' />
-							{!notify && (
-								<div className='min-w-5 h-5 flex items-center justify-center rounded-full absolute -top-2 -right-2 bg-[#FF1818] text-white px-1 text-xs'>
-									3
+							{!notify && cartCount > 0 && (
+								<div className='min-w-5 h-5 flex items-center justify-center rounded-full absolute -top-1.5 -right-1.5 bg-[#FF1818] text-white px-1 text-xs'>
+									{cartCount}
 								</div>
 							)}
 						</Link>
 
 						<Link to='faworites' className='relative'>
 							<img src={heart} alt='favorites' className='w-[35px] h-[35px]' />
-							{notify && (
-								<div className='min-w-5 h-5 flex items-center justify-center rounded-full absolute -top-2 -right-2 bg-[#FF1818] text-white px-1 text-xs'>
-									3
+							{!notify && likeCount > 0 && (
+								<div className='min-w-5 h-5 flex items-center justify-center rounded-full absolute -top-1.5 -right-1.5 bg-[#FF1818] text-white px-1 text-xs'>
+									{likeCount}
 								</div>
 							)}
 						</Link>

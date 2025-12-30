@@ -22,33 +22,6 @@ const Home = lazy(() => import("../pages/home.jsx"))
 const ProductView = lazy(() => import("../pages/productView.jsx"))
 
 const Router = () => {
-  const [loading, setLoading] = useState(true)
-
-  // Wait for the full page to load
-  useEffect(() => {
-    const handleLoad = () => setLoading(false)
-    window.addEventListener("load", handleLoad)
-    return () => window.removeEventListener("load", handleLoad)
-  }, [])
-
-  if (loading) {
-    return (
-      <div style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100vw",
-        height: "100vh",
-        background: "#fff",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        zIndex: 9999
-      }}>
-        <h1>Loading...</h1>
-      </div>
-    )
-  }
 
   const router = createBrowserRouter(
     createRoutesFromElements(

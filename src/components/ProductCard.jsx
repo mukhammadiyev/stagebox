@@ -4,11 +4,14 @@ import { cn } from '@/lib/utils'
 import { useState } from 'react'
 import { IoMdHeart } from 'react-icons/io'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useMediaQuery } from '../hooks/useMediaQuery'
 
 export default function ProductCard({ product, loading }) {
 	const { category } = useParams()
 	const navigate = useNavigate()
 	const sizes = [36, 37, 38, 39, 40, 41, 42, 43]
+	const isMobile = useMediaQuery('(max-width:760px)')
+	const [opened, setOpened] = useState(false)
 
 	// Initialize liked state from localStorage
 	const [liked, setLiked] = useState(() => {
@@ -55,7 +58,12 @@ export default function ProductCard({ product, loading }) {
 	}
 
 	return (
-		<div className='group relative h-[204px] 2xl:h-[350px] w-full flex justify-center'>
+		<div
+			className='group relative h-[204px] 2xl:h-[350px] w-full flex justify-center'
+			onClick={() => {
+				if (isMobile) setOpened(prev => !prev)
+			}}
+		>
 			<Card
 				className={cn(
 					'relative rounded-[20px] cursor-pointer',
@@ -64,14 +72,15 @@ export default function ProductCard({ product, loading }) {
 				)}
 			>
 				<CardContent className='flex flex-col justify-between p-0!'>
-					<div
-						className='w-full'
-						onClick={() => navigate(`/${category}/${product.id}`)}
-					>
+					<div className='w-full'>
 						<img
 							src={product.images[0]}
 							alt=''
 							className='w-full h-[120px] 2xl:h-[180px] rounded-t-[20px] object-contain bg-[#E2DAD8] '
+							onClick={e => {
+								e.stopPropagation()
+								navigate(`/${category}/${product.id}`)
+							}}
 						/>
 					</div>
 					<div className='w-full p-2.5 py-3 2xl:p-6 flex flex-col'>
@@ -106,16 +115,28 @@ export default function ProductCard({ product, loading }) {
 					'z-30 pointer-events-auto py-0!',
 					'h-[270px] 2xl:h-[420px]'
 				)}
+				style={
+					isMobile && opened
+						? { opacity: 1, pointerEvents: 'auto', zIndex: 30 }
+						: {}
+				}
 			>
 				<CardContent className='flex flex-col justify-between p-0!'>
-					<div
-						className='w-full'
-						onClick={() => navigate(`/${category}/${product.id}`)}
-					>
+					<div className='w-full'>
 						<img
 							src={product.images[0]}
 							alt=''
 							className='w-full h-[120px] 2xl:h-[180px] rounded-t-[20px] object-contain bg-[#E2DAD8] '
+							onClick={e => {
+								if (isMobile) {
+									e.stopPropagation() // prevents mobile toggle
+									if(opened){
+										navigate(`/${category}/${product.id}`)
+									}
+								} else {
+									navigate(`/${category}/${product.id}`)
+								}
+							}}
 						/>
 					</div>
 					<div className='w-full p-2.5 2xl:p-6 flex flex-col h-[150px] 2xl:h-max'>

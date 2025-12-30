@@ -3,7 +3,7 @@ import { OrbitControls, Stage, useGLTF } from '@react-three/drei'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
 
-function Model({ url, scale = 1 }) {
+function Model({ url, scale }) {
 	const { scene } = useGLTF(url)
 	const meshRef = useRef()
 	
@@ -34,8 +34,8 @@ function View3D({ object, sizes }) {
 				// Important: Use always frameloop
 				frameloop="always"
 			>
-				<Stage environment='city' intensity={0.6}>
-					<Model url={object} sizes={sizes} />
+				<Stage environment='city' intensity={0.6} adjustCamera={false}>
+					<Model url={object} scale={sizes || [1,1,1]} />
 				</Stage>
 				<OrbitControls
 					enableZoom={false}

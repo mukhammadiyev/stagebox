@@ -7,13 +7,18 @@ import 'swiper/css/pagination'
 import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import AirMax2D from '../assets/air_max_2d.png'
-import hoodie2D from '../assets/hoodie.png'
-import jacjet2D from '../assets/jacket.jpg'
-import thsirt2D from '../assets/tshirt.jpg'
 import bgDec from '../assets/bg_dec.png'
+import hoodie2D from '../assets/hoodie.png'
+import jacjet2D from '../assets/jacket.png'
 import NiteJogger2D from '../assets/nite_jogger_2d.png'
+import thsirt2D from '../assets/tshirt.png'
 import yeezyr2D from '../assets/yeezy_2d.png'
 import View3D from './View3D'
+import chanel2D from '../assets/chanel.png'
+import dior2D from '../assets/dior.png'
+import handbag2D from '../assets/handbag.png'
+
+
 
 // Define other slide arrays
 const crossesSlides = [
@@ -23,6 +28,7 @@ const crossesSlides = [
 		inactivePic: NiteJogger2D,
 		brand: 'Adidas',
 		activated3D: 'models/adidas_nite_jogger2.glb',
+		sizes: [2, 2, 2],
 	},
 	{
 		id: 2,
@@ -30,6 +36,7 @@ const crossesSlides = [
 		inactivePic: yeezyr2D,
 		brand: 'Adidas',
 		activated3D: 'models/adidas_yeezy_boost.glb',
+		sizes: [2.2, 2.2, 2.2],
 	},
 	{
 		id: 3,
@@ -37,6 +44,34 @@ const crossesSlides = [
 		inactivePic: AirMax2D,
 		brand: 'Nike',
 		activated3D: 'models/nike_air_max.glb',
+		sizes: [13, 13, 13],
+	},
+]
+
+const accesoriesSlides = [
+	{
+		id: 1,
+		theme: `Medium Bag`,
+		inactivePic: chanel2D,
+		brand: 'Chanel',
+		activated3D: 'models/chanel.glb',
+		sizes: [6, 6, 6],
+	},
+	{
+		id: 2,
+		theme: 'mini Bag',
+		inactivePic: dior2D,
+		brand: 'Dior',
+		activated3D: 'models/dior.glb',
+		sizes: [2.2, 2.2, 2.2],
+	},
+	{
+		id: 3,
+		theme: `Teen handbag`,
+		inactivePic: handbag2D,
+		brand: 'Louvi',
+		activated3D: 'models/handbag.glb',
+		sizes: [0.02, 0.02, 0.02],
 	},
 ]
 
@@ -47,6 +82,7 @@ const clothesSlides = [
 		inactivePic: hoodie2D,
 		brand: 'Adidas',
 		activated3D: 'models/hoodie.glb',
+		sizes: [3, 4, 3],
 	},
 	{
 		id: 2,
@@ -54,6 +90,7 @@ const clothesSlides = [
 		inactivePic: jacjet2D,
 		brand: 'Nike',
 		activated3D: 'models/jacket.glb',
+		sizes: [0.04, 0.04, 0.04],
 	},
 	{
 		id: 3,
@@ -61,6 +98,7 @@ const clothesSlides = [
 		inactivePic: thsirt2D,
 		brand: 'Puma',
 		activated3D: 'models/tshirt.glb',
+		sizes: [4, 4, 4],
 	},
 ]
 
@@ -74,6 +112,7 @@ function ShoeSlider3D() {
 		const path = location.pathname.toLowerCase()
 		if (path.includes('crosses')) return crossesSlides
 		if (path.includes('clothes')) return clothesSlides
+		if (path.includes('accesories')) return accesoriesSlides
 		return crossesSlides // default fallback
 	}, [location.pathname])
 
@@ -111,7 +150,7 @@ function ShoeSlider3D() {
 											Смотреть все
 										</button>
 									</div>
-									<View3D object={slide.activated3D} sizes={[2, 1, 1]} />
+									<View3D object={slide.activated3D} sizes={slide.sizes} />
 								</div>
 							</SwiperSlide>
 						))}

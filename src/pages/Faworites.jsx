@@ -31,7 +31,7 @@ export default function Favorites() {
 	return (
 		<div className='w-full container mx-auto px-8 lg:px-16 xl:px-25 2xl:px-30 pt-20 pb-40'>
 			<h1 className='text-4xl font-semibold mb-8'>Избранное</h1>
-			<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+			<div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
 				{likedProducts.map(product => (
 					<ProductCard key={product.id} product={product} loading={false} />
 				))}

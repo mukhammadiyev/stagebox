@@ -1,14 +1,15 @@
 import { useState } from 'react'
-import { Navigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import FiltersSidebar from '../components/FiltersSidebar'
 import ProductCard from '../components/ProductCard'
 import useFilter from '../hooks/useFilter'
+
 export default function Filter() {
 	const { category } = useParams()
 	const validCategories = ['clothes', 'crosses', 'accesories']
 
 	if (!validCategories.includes(category)) {
-		return <Navigate to={`/${category}`} replace />
+		return <Navigate to='/crosses' replace />
 	}
 
 	const categoryMap = {

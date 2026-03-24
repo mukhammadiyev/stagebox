@@ -21,6 +21,7 @@ function index() {
 	const isMobile = useMediaQuery('(max-width:760px)')
 
 	const categories = ['crosses', 'clothes', 'accesories']
+	
 
 	useEffect(() => {
 		setInterval(() => {
@@ -211,7 +212,7 @@ function index() {
 							)}
 						</Link>
 
-						<Link to={'personal'} className='relative'>
+						<Link to={'personal/profile'} className='relative'>
 							<img
 								src={ProfilePic}
 								alt='profile'

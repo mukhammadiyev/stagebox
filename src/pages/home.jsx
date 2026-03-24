@@ -5,6 +5,7 @@ import MiniBlog from '../components/MiniBlog'
 import ShoeSlider3D from '../components/ShoeSlider3D'
 import ViewProductsSlider from '../components/ViewProductsSlider'
 import { useMediaQuery } from '../hooks/useMediaQuery'
+import NotFound from '../components/NotFoundPage.jsx'
 function home() {
 	const { category } = useParams()
 	const location = useLocation()
@@ -15,6 +16,10 @@ function home() {
 		clothes: 'mens-shirts',
 		crosses: 'mens-shoes',
 		accesories: 'womens-bags',
+	}
+
+	if (!categoryMap[category]) {
+		return <NotFound />
 	}
 
 	const currentCategory = categoryMap[category] || 'mens-shoes'

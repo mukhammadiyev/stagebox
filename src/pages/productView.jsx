@@ -48,7 +48,7 @@ export default function productView() {
 
 			// Check if product with the same size exists
 			const existingIndex = cart.findIndex(
-				item => item.id === product.id && item.size === selectedSize
+				item => item.id === product.id && item.size === selectedSize,
 			)
 
 			if (existingIndex !== -1) {
@@ -82,45 +82,49 @@ export default function productView() {
 	const currentCategory = categoryMap[category] || 'mens-shoes'
 
 	const toggleLike = () => {
-	const likedProducts = JSON.parse(localStorage.getItem('likedProducts')) || []
+		const likedProducts =
+			JSON.parse(localStorage.getItem('likedProducts')) || []
 
-	if (!liked) {
-		if (!likedProducts.find(p => p.id === product.id)) likedProducts.push(product)
-		setLiked(true)
-	} else {
-		const index = likedProducts.findIndex(p => p.id === product.id)
-		if (index !== -1) likedProducts.splice(index, 1)
-		setLiked(false)
+		if (!liked) {
+			if (!likedProducts.find(p => p.id === product.id))
+				likedProducts.push(product)
+			setLiked(true)
+		} else {
+			const index = likedProducts.findIndex(p => p.id === product.id)
+			if (index !== -1) likedProducts.splice(index, 1)
+			setLiked(false)
+		}
+
+		localStorage.setItem('likedProducts', JSON.stringify(likedProducts))
 	}
-
-	localStorage.setItem('likedProducts', JSON.stringify(likedProducts))
-}
 
 	return (
 		<div className='container w-full mx-auto'>
-			<div className='w-full px-8 lg:px-16 xl:px-25 2xl:px-30 py-18 flex flex-col'>
-				<div className='flex flex-col w-full gap-1.5 mb-5'>
-					<h1 className='text-5xl font-semibold font-montserrat text-[#29292D] uppercase '>
+			<div className='w-full px-4 sm:px-6 md:px-8 lg:px-16 xl:px-25 2xl:px-30 py-6 sm:py-10 md:py-18 flex flex-col'>
+				<div className='flex flex-col w-full gap-1.5 mb-6 md:mb-5'>
+					<h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold font-montserrat text-[#29292D] uppercase'>
 						{product.title}
 					</h1>
-					<p className=' text-[#B3C0D2] text-lg font-ruda '>Артикул 19666</p>
+					<p className='text-[#B3C0D2] text-base sm:text-lg font-ruda'>
+						Артикул 19666
+					</p>
 				</div>
 
-				<div className='w-full flex gap-5 '>
-					<div className='w-full max-w-[700px]'>
+				<div className='w-full flex flex-col md:flex-row gap-5 md:gap-6 lg:gap-8'>
+					<div className='w-full md:max-w-[700px]'>
 						{/* MAIN IMAGE */}
 						<Swiper
 							modules={[Navigation, Thumbs]}
 							thumbs={{ swiper: thumbsSwiper }}
-							className='rounded-2xl'
+							className='rounded-xl sm:rounded-2xl'
 						>
 							{product.images?.map((img, i) => (
 								<SwiperSlide key={i}>
-									<div className='w-full h-[440px] bg-gray-100 rounded-2xl flex items-center justify-center'>
+									<div className='w-full h-[300px] sm:h-[350px] md:h-[440px] bg-gray-100 rounded-xl sm:rounded-2xl flex items-center justify-center'>
 										<img
 											src={img}
 											alt=''
-											className='w-full h-full object-contain rounded-2xl'
+											className='w-full h-full object-contain rounded-xl sm:rounded-2xl'
 										/>
 									</div>
 								</SwiperSlide>
@@ -131,13 +135,18 @@ export default function productView() {
 						<Swiper
 							modules={[Thumbs]}
 							onSwiper={setThumbsSwiper}
-							slidesPerView={4}
-							spaceBetween={12}
-							className='mt-4'
+							slidesPerView={3}
+							breakpoints={{
+								576: {
+									slidesPerView: 4,
+								},
+							}}
+							spaceBetween={8}
+							className='mt-2 sm:mt-4'
 						>
 							{product.images?.map((img, i) => (
 								<SwiperSlide key={i}>
-									<div className='cursor-pointer border rounded-xl overflow-hidden bg-gray-50'>
+									<div className='cursor-pointer border rounded-lg sm:rounded-xl overflow-hidden bg-gray-50'>
 										<img
 											src={img}
 											alt=''
@@ -148,40 +157,46 @@ export default function productView() {
 							))}
 						</Swiper>
 					</div>
-					<div className='w-full flex flex-col items-center justify-between pt-15  '>
-						<h2 className='text-[#FF1818] text-5xl font-semibold font-montserrat '>
+					<div className='w-full flex flex-col items-center justify-between md:pt-15'>
+						<h2 className='text-3xl sm:text-4xl md:text-5xl text-[#FF1818] font-semibold font-montserrat'>
 							{product.price} ₽
 						</h2>
-						<div className='w-full bg-white p-10 flex flex-col gap-8 rounded-3xl'>
-							<p className='text-2xl font-montserrat text-[#29292D] font-bold text-center '>
+						<div className='w-full bg-white p-6 sm:p-8 md:p-10 flex flex-col gap-6 sm:gap-8 rounded-2xl sm:rounded-3xl'>
+							<p className='text-lg sm:text-xl md:text-2xl font-montserrat text-[#29292D] font-bold text-center'>
 								ВЫБЕРИТЕ РАЗМЕР
 							</p>
-							<div className='w-full flex flex-wrap gap-5.5 items-center justify-center'>
+							<div className='w-full flex flex-wrap gap-3 sm:gap-4 md:gap-5.5 items-center justify-center'>
 								{sizes.map((s, i) => (
 									<button
 										key={i}
 										onClick={() => setSelectedSize(s)}
-										className={`w-20 h-16 flex items-center justify-center rounded-[5px] font-ruda text-sm flex-col transition duration-500 cursor-pointer
+										className={`flex-1 min-w-[70px] h-14 sm:h-16 flex items-center justify-center rounded-[5px] font-ruda text-xs sm:text-sm flex-col transition duration-500 cursor-pointer
       ${
 				selectedSize === s
 					? 'bg-[#002C6A] text-white' // selected style
 					: 'text-[#002C6A] hover:text-white hover:bg-[#002C6A]' // normal hover style
 			}`}
 									>
-										<span key={s} className='text-xl font-bold'>
-											{s} EUR
+										<span
+											key={s}
+											className='text-base sm:text-lg md:text-xl font-bold'
+										>
+											{s}
 										</span>
-										({s - 15} cm)
+										<span className='text-xs'>{s - 15} cm</span>
 									</button>
 								))}
 							</div>
 						</div>
-						<div className='w-full flex flex-col gap-4 justify-center items-center'>
-							<button className='text-2xl font-montserrat border-2 flex gap-2.5 items-center justify-center w-max py-5 px-16 rounded-full border-[#FF1818] bg-[#FF1818] text-white hover:text-[#FF1818] hover:bg-white cursor-pointer transition'onClick={toggleLike} >
+						<div className='w-full flex flex-col gap-3 sm:gap-4 justify-center items-center'>
+							<button
+								className='text-lg sm:text-xl md:text-2xl font-montserrat border-2 flex gap-2.5 items-center justify-center w-full md:w-max py-3 sm:py-4 md:py-5 px-6 sm:px-10 md:px-16 rounded-full border-[#FF1818] bg-[#FF1818] text-white hover:text-[#FF1818] hover:bg-white cursor-pointer transition'
+								onClick={toggleLike}
+							>
 								{liked ? 'Не нравится' : 'Нравится'} <FiHeart />
 							</button>
 							<button
-								className={`text-2xl font-montserrat border-2 flex gap-2.5 items-center justify-center w-max py-5 px-16 rounded-full border-[#002C6A] bg-[#002C6A] text-white 
+								className={`text-lg sm:text-xl md:text-2xl font-montserrat border-2 flex gap-2.5 items-center justify-center w-full md:w-max py-3 sm:py-4 md:py-5 px-6 sm:px-10 md:px-16 rounded-full border-[#002C6A] bg-[#002C6A] text-white 
     hover:text-[#002C6A] hover:bg-white 
     disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#002C6A] disabled:hover:text-white transition`}
 								onClick={addToCart}
@@ -193,9 +208,9 @@ export default function productView() {
 					</div>
 				</div>
 
-				<div className='w-full mt-10'>
+				<div className='w-full mt-8 md:mt-10'>
 					{/* Tabs */}
-					<div className='flex gap-10 text-xl font-semibold mb-6'>
+					<div className='flex flex-wrap gap-4 sm:gap-6 md:gap-10 text-sm sm:text-base md:text-xl font-semibold mb-6'>
 						<NavLink
 							to='description'
 							className={({ isActive }) =>
@@ -239,8 +254,8 @@ export default function productView() {
 					</div>
 
 					{/* Tab content */}
-					<div className='w-full flex gap-10'>
-						<div className='w-full text-lg font-ruda text-[#29292D] '>
+					<div className='w-full flex flex-col md:flex-row gap-6 md:gap-10'>
+						<div className='w-full md:flex-1 text-base sm:text-lg font-ruda text-[#29292D]'>
 							Кроссовки Nike Air Presto – обувь, которая создана с учетом
 							максимальной вентиляции стопы и комфорта при ношении и занятиях
 							спортом. Верхняя часть кроссовок изготовлена из материала, который
@@ -252,11 +267,13 @@ export default function productView() {
 							затягивании образует жесткую и эластичную конструкцию. -
 							Комфортный микроклимат - Легкий вес - Амортизация стопы
 						</div>
-						<div className='w-[260px] grow text-[#0B2B6A] text-lg font-medium'>
-							<div className='w-full grid grid-cols-2 gap-y-3'>
+						<div className='w-full md:w-[260px] md:grow text-[#0B2B6A] text-base sm:text-lg font-medium'>
+							<div className='w-full grid grid-cols-2 md:grid-cols-2 gap-y-3 gap-x-6 md:gap-x-0'>
 								{specs.map(item => (
 									<div key={item.label} className='contents'>
-										<span className='text-right pr-6'>{item.label}</span>
+										<span className='text-left md:text-right md:pr-6'>
+											{item.label}
+										</span>
 										<span className='font-bold'>{item.value}</span>
 									</div>
 								))}

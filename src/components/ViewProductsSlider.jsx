@@ -1,3 +1,4 @@
+import { Skeleton } from '@/components/ui/skeleton'
 import { useRef } from 'react'
 import { FaCaretLeft, FaCaretRight } from 'react-icons/fa'
 import 'swiper/css'
@@ -5,12 +6,12 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { useMediaQuery } from '../hooks/useMediaQuery'
 import useProducts from '../hooks/useProducts'
 import ProductCard from './ProductCard'
-import { useMediaQuery } from '../hooks/useMediaQuery'
-
 export default function ViewProductsSlider({ forPr, theme }) {
 	const { products, loading, error } = useProducts({ forPr: forPr })
+	const load = loading
 	const prevRef = useRef(null)
 	const nextRef = useRef(null)
 	const mobile = useMediaQuery('(max-width:760px)')
@@ -26,7 +27,15 @@ export default function ViewProductsSlider({ forPr, theme }) {
 	return (
 		<div className='w-full container mx-auto'>
 			<div className='px-8 lg:px-16 xl:px-24 py-12'>
-				<h1 className='text-[#002C6A] text-lg 2xl:text-5xl font-bold mb-3 2xl:mb-8'>{theme}</h1>
+				{
+					(load ? (
+						<Skeleton className='w-6/12 h-5 mb-3 2xl:mb-8 rounded-[4px] bg-gray-300 animate-pulse' />
+					) : (
+						<h1 className='text-[#002C6A] text-lg 2xl:text-5xl font-bold mb-3 2xl:mb-8'>
+							{theme}
+						</h1>
+					))
+				}
 
 				<div className='w-full container mx-auto relative'>
 					{/* LEFT ARROW */}

@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy } from "react"
+import {   lazy , Suspense } from "react"
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -20,6 +20,8 @@ const Search = lazy(() => import("../pages/Search.jsx"))
 const UserPersonal = lazy(() => import("../pages/UserPersonal.jsx"))
 const Home = lazy(() => import("../pages/home.jsx"))
 const ProductView = lazy(() => import("../pages/productView.jsx"))
+const NotFound = lazy(() => import("../components/NotFoundPage.jsx"))
+import Loader from "../components/Loader.jsx"
 
 const Router = () => {
 
@@ -45,12 +47,15 @@ const Router = () => {
           <Route path="orders" element={<OrderList />} />
         </Route>
         <Route path="/faworites" element={<Favorites />} />
+        <Route path="*" element={<NotFound />} />
         <Route path="/search" element={<Search />} />
       </Route>
     )
   )
 
-  return <RouterProvider router={router} />
+  return <Suspense fallback={<Loader />}>
+    <RouterProvider router={router} />
+  </Suspense>
 }
 
 export default Router
